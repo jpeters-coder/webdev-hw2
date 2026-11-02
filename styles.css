@@ -1,60 +1,192 @@
-/* =========================================
-   1. TYPE SELECTORS (body, h1, h2, p, ul)
-   ========================================= */
+/* Homework 3: Flexbox + Grid layout on the Homework 2 navy/amber page.
+   No fixed widths above 320px. Columns change at 768px and 1200px. */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+}
+
+img,
+svg,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #0f172a; /* Deep Navy (Complementary Base) */
-    color: #f8fafc;            /* Crisp Off-White Text */
+    background-color: #0f172a;
+    color: #f8fafc;
     line-height: 1.6;
     margin: 0;
-    padding: 20px;
+    overflow-wrap: break-word;
 }
-h1, h2 {
-    color: #f59e0b; /* Warm Amber/Gold (Complementary Accent to Navy) */
+
+h1,
+h2 {
+    color: #f59e0b;
     margin-top: 0;
+    line-height: 1.25;
 }
+
+h1 {
+    font-size: 1.7rem;
+    margin-bottom: 8px;
+}
+
+h2 {
+    font-size: 1.35rem;
+    margin-bottom: 10px;
+}
+
 p {
-    margin-bottom: 12px;
-    padding: 4px 0;
-    border-bottom: 1px solid transparent;
+    margin: 0 0 12px;
 }
-/* =========================================
-   2. ID SELECTORS (#main-header, #page-footer)
-   Box Model Element #1 & #2
-   ========================================= */
+
+a {
+    color: inherit;
+}
+
+.page {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 12px;
+}
+
+/* Header: flex nav stacks on small screens and sits beside the title when it fits. */
 #main-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 20px;
     background-color: #1e293b;
-    text-align: center;
-    /* Deliberate Box Model Adjustments (Element 1) */
-    margin: 20px auto 30px auto;
-    padding: 30px 20px;
+    margin: 0 0 20px;
+    padding: 16px;
     border: 3px solid #f59e0b;
     border-radius: 8px;
-    max-width: 800px;
 }
+
+.brand {
+    flex: 1 1 12rem;
+    min-width: 0;
+}
+
+.brand p {
+    margin: 0;
+    color: #f8fafc;
+}
+
+#main-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+#main-nav a {
+    display: inline-block;
+    background-color: #f59e0b;
+    color: #0f172a;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+/* About + projects: one column, then two from 768px up. */
+.intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+}
+
+.content-card {
+    background-color: #1e293b;
+    margin: 0;
+    padding: 20px;
+    border: 2px solid #38bdf8;
+    border-left: 6px solid #f59e0b;
+    border-radius: 8px;
+    min-width: 0;
+}
+
+.content-card p:last-child {
+    margin-bottom: 0;
+}
+
+#highlights {
+    margin-top: 20px;
+}
+
+/* Feature cards: 1 column by default. */
+.feature-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+}
+
+.feature-grid li {
+    background-color: #1e293b;
+    color: #f59e0b;
+    font-weight: bold;
+    margin: 0;
+    padding: 20px;
+    border: 2px solid #38bdf8;
+    border-left: 6px solid #f59e0b;
+    border-radius: 8px;
+    min-width: 0;
+}
+
 #page-footer {
     background-color: #1e293b;
     text-align: center;
     font-size: 0.9rem;
     color: #94a3b8;
-    /* Deliberate Box Model Adjustments (Element 2) */
-    margin: 40px auto 10px auto;
-    padding: 15px 20px;
+    margin: 20px 0 0;
+    padding: 15px 16px;
     border-top: 2px solid #f59e0b;
     border-bottom: 2px solid #f59e0b;
-    max-width: 800px;
 }
-/* =========================================
-   3. CLASS SELECTOR (.content-card)
-   Box Model Element #3
-   ========================================= */
-.content-card {
-    background-color: #1e293b;
-    /* Deliberate Box Model Adjustments (Element 3) */
-    margin: 25px auto;
-    padding: 25px 30px;
-    border: 2px solid #38bdf8;
-    border-left: 6px solid #f59e0b;
-    border-radius: 8px;
-    max-width: 800px;
+
+#page-footer p {
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    .page {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    #main-header {
+        padding: 22px 24px;
+    }
+
+    .intro-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .feature-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .feature-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    }
 }
